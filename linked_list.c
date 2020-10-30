@@ -29,7 +29,7 @@ list* create_linked_list()
 int error(list *meta)
 {
     if (meta->err != 0) {
-        printf("linked_list throw exception");
+        printf("linked_list threw exception");
         return 1;
     } else {
         return 0;
