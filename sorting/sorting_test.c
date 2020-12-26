@@ -11,22 +11,17 @@
 // int *A - the array
 void sorting_test(void (*callback))
 {
-    for (int i = 1; i < 102; i++)
-    {
-        if(!test(callback, i, 0, 10))
-        {
+    for (int i = 1; i < 102; i++) {
+        if(!test(callback, i, 0, 10)) {
             return;
         }
     }
-    for (int i = 1; i < 1001; i += 100)
-    {
-        if(!test(callback, i, -10000, 10000))
-        {
+    for (int i = 1; i < 1001; i += 100) {
+        if(!test(callback, i, -10000, 10000)) {
             return;
         }
     }
-    if(!test(callback, 10000, MIN, MAX))
-    {
+    if(!test(callback, 10000, MIN, MAX)) {
         return;
     }
     printf("Sorting successful!\n");
@@ -36,8 +31,7 @@ int test(void (*callback)(int n, int *A), int n, int min, int max)
 {
     int A[n];
     srand(time(0));
-    for (int i = 0; i < n; i++)
-    {
+    for (int i = 0; i < n; i++) {
         A[i] = rand() % (max * 2) + min;
     }
 
@@ -45,13 +39,10 @@ int test(void (*callback)(int n, int *A), int n, int min, int max)
     (*callback)(n, A);
 
     // checking
-    for (int i = 0; i < n - 1; i++)
-    {
-        if (A[i] > A[i + 1])
-        {
+    for (int i = 0; i < n - 1; i++) {
+        if (A[i] > A[i + 1]) {
             printf("[");
-            for (int j = 0; j < n - 1; j++)
-            {
+            for (int j = 0; j < n - 1; j++) {
                 printf("%d, ", A[j]);
             }
             printf("%d]\n", A[n - 1]);
@@ -66,3 +57,4 @@ int test(void (*callback)(int n, int *A), int n, int min, int max)
     }
     return 1;
 }
+
