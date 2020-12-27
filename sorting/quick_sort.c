@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include "sorting_test.h"
 
-typedef struct Pivot
-{
+typedef struct Pivot {
     int left;
     int right;
 } piv;
@@ -29,8 +28,7 @@ void quick_sort(int n, int *A)
 
 void _qsort(int left, int right, int *A)
 {
-    if (left < right - 1)
-    {
+    if (left < right - 1) {
         piv p = partition(left, right, A);
         _qsort(left, p.left, A);
         _qsort(p.right + 1, right, A);
@@ -44,61 +42,40 @@ piv partition(int left, int right, int *A)
     piv p;
     p.left = rand_i;
     p.right = rand_i;
-    for (int i = left; i < right;)
-    {
-        if (A[i] < pivot)
-        {
-            if (i < p.left)
-            {
+    for (int i = left; i < right;) {
+        if (A[i] < pivot) {
+            if (i < p.left) {
                 i++;
-            }
-            else if (i > p.left && i < p.right)
-            {
+            } else if (i > p.left && i < p.right) {
                 swap(&A[i], &A[p.left]);
                 p.left++;
                 i++;
-            }
-            else if (i > p.right)
-            {
+            } else if (i > p.right) {
                 swap(&A[p.left], &A[i]);
                 p.right++;
                 p.left++;
                 swap(&A[p.right], &A[i]);
             }
-        }
-        else if (A[i] > pivot)
-        {
-            if (i < p.left)
-            {
+        } else if (A[i] > pivot) {
+            if (i < p.left) {
                 swap(&A[i], &A[p.right]);
                 p.right--;
                 p.left--;
                 swap(&A[i], &A[p.left]);
-            }
-            if (i > p.left && i < p.right)
-            {
+            } if (i > p.left && i < p.right) {
                 swap(&A[i], &A[p.right]);
                 p.right--;
                 i++;
-            }
-            if (i > p.right)
-            {
+            } if (i > p.right) {
                 i++;
             }
-        }
-        else if (A[i] == pivot)
-        {
-            if (i < p.left)
-            {
+        } else if (A[i] == pivot) {
+            if (i < p.left) {
                 p.left--;
                 swap(&A[i], &A[p.left]);
-            }
-            else if (i >= p.left && i <= p.right)
-            {
+            } else if (i >= p.left && i <= p.right) {
                 i++;
-            }
-            else if (i > p.right)
-            {
+            } else if (i > p.right) {
                 p.right++;
                 swap(&A[i], &A[p.right]);
             }
