@@ -14,13 +14,10 @@ int main()
 void selection_sort(int n, int *A)
 {
     int min;
-    for (int i = 0; i < n - 1; i++)
-    {
+    for (int i = 0; i < n - 1; i++) {
         min = i;
-        for (int j = i + 1; j < n; j++)
-        {
-            if (A[j] < A[min])
-            {
+        for (int j = i + 1; j < n; j++) {
+            if (A[j] < A[min]) {
                 min = j;
             }
         }
