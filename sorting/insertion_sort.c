@@ -13,15 +13,13 @@ int main()
 
 void insertion_sort(int n, int *A)
 {
-    for (int i = 1; i < n; i++)
-    {
-        for (int j = i; j > 0; j--)
-        {
-            if (A[j - 1] > A[j])
-            {
+    for (int i = 1; i < n; i++) {
+        for (int j = i; j > 0; j--) {
+            if (A[j - 1] > A[j]) {
                 swap(&A[j - 1], &A[j]);
+            } else {
+                break;
             }
-            else break;
         }
     }
 }
