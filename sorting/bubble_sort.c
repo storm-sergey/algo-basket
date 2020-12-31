@@ -14,13 +14,10 @@ int main()
 void bubble_sort(int n, int A[])
 {
     int not_sorted = 1;
-    while(not_sorted)
-    {
+    while(not_sorted) {
         not_sorted = 0;
-        for (int i = 0; i < n - 1; i++)
-        {
-            if (A[i] > A[i + 1])
-            {
+        for (int i = 0; i < n - 1; i++) {
+            if (A[i] > A[i + 1]) {
                 not_sorted = 1;
                 swap(&A[i], &A[i + 1]);
             }
