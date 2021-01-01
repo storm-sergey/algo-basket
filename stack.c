@@ -1,8 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct Stack
-{
+typedef struct Stack {
     int size, i;
     int *arr;
 } stack;
@@ -29,8 +28,7 @@ int main(int argc, char *argv[])
 
     // filling the stack
     printf("push nums to stack:\n");
-    for (int i = 0; i < atoi(argv[1]); i++)
-    {
+    for (int i = 0; i < atoi(argv[1]); i++) {
         printf("%d\n", i);
         push(&s, i);
     }
@@ -67,29 +65,28 @@ void freestack(stack *s)
 
 void push(stack *s, int x)
 {
-    if (s->i < (s->size))
-    {
+    if (s->i < (s->size)) {
         (s->i)++;
         s->arr[s->i] = x;
-    }
-    else
+    } else {
         printf("%d size stack is full\n", s->size);
+    }
 }
 
 int is_empty(stack *s)
 {
-    if (s->i < 0)
+    if (s->i < 0) {
         return 1;
-    else
+    } else {
         return 0;
+    }
 }
 
 int pop(stack *s)
 {
-    if (!is_empty(s))
+    if (!is_empty(s)) {
         return s->arr[(s->i)--];
-    else
-    {   
+    } else {   
         printf("%d size stack is empty\n", s->size);
         return 0;
     }
