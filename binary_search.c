@@ -12,19 +12,15 @@ int binary_search(int x, int* arr, int len)
 {
     int low = 0;
     int high = len - 1;
-    while (low <= high)
-    {
+    while (low <= high) {
         int mid = (low + high) / 2;
-        if (x < arr[mid])
-        {
+        if (x < arr[mid]) {
             high = mid - 1;
         }
-        else if (x > arr[mid])
-        {
+        else if (x > arr[mid]) {
             low = mid + 1;
         }
-        else if (x == arr[mid])
-        {
+        else if (x == arr[mid]) {
             return mid;
         }
     }
