@@ -5,7 +5,7 @@
 typedef struct Stack
 {
     int size, i;
-    int *_stack;
+    int *arr;
 } stack;
 
 stack init_stack_char(char*);
@@ -52,7 +52,7 @@ stack init_stack_int(int size)
     stack s;   
     s.size = size;
     s.i = -1;
-    s._stack = (int*) malloc(s.size * sizeof(int));
+    s.arr= (int*) malloc(s.size * sizeof(int));
     return s;
 }
 
@@ -61,37 +61,37 @@ stack init_stack_char(char *size)
     return init_stack(atoi(size));
 }
 
-void freestack(stack *this)
+void freestack(stack *s)
 {
-    free(this->_stack);
+    free(s->arr);
 }
 
-void push(stack *this, int x)
+void push(stack *s, int x)
 {
-    if (this->i < (this->size))
+    if (s->i < (s->size))
     {
-        (this->i)++;
-        this->_stack[this->i] = x;
+        (s->i)++;
+        s->arr[s->i] = x;
     }
     else
-        printf("%d size stack is full\n", this->size);
+        printf("%d size stack is full\n", s->size);
 }
 
-int is_empty(stack *this)
+int is_empty(stack *s)
 {
-    if (this->i < 0)
+    if (s->i < 0)
         return 1;
     else
         return 0;
 }
 
-int pop(stack *this)
+int pop(stack *s)
 {
-    if (!is_empty(this))
-        return this->_stack[(this->i)--];
+    if (!is_empty(s))
+        return s->arr[(s->i)--];
     else
     {   
-        printf("%d size stack is empty\n", this->size);
+        printf("%d size stack is empty\n", s->size);
         return 0;
     }
 }
