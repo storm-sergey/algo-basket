@@ -74,23 +74,21 @@ void push(stack *this, int x)
         this->_stack[this->i] = x;
     }
     else
-    {
         printf("%d size stack is full\n", this->size);
-    }
 }
 
 int is_empty(stack *this)
 {
-    if(this->i < 0) return 1;
-    else return 0;
+    if (this->i < 0)
+        return 1;
+    else
+        return 0;
 }
 
 int pop(stack *this)
 {
     if (!is_empty(this))
-    {
         return this->_stack[(this->i)--];
-    }
     else
     {   
         printf("%d size stack is empty\n", this->size);
