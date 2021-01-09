@@ -8,18 +8,19 @@ typedef struct Stack
     int *_stack;
 } stack;
 
-void push(stack*, int);
-int is_empty(stack*);
-int pop(stack*);
 stack init_stack_char(char*);
 stack init_stack_int(int);
 void freestack(stack*);
+void push(stack*, int);
+int is_empty(stack*);
+int pop(stack*);
 
-#define init_stack(size)    \
-    _Generic((size),        \
-    char*: init_stack_char, \
-    int: init_stack_int,    \
-    default: init_stack_char\
+// overloading
+#define init_stack(size)     \
+    _Generic((size),         \
+    char*: init_stack_char,  \
+    int: init_stack_int,     \
+    default: init_stack_char \
     )(size)
 
 int main(int argc, char *argv[])
@@ -34,8 +35,8 @@ int main(int argc, char *argv[])
         printf("%d\n", i);
         push(&s, i);
     }
-
     printf("\n");
+
     // printing the stack
     printf("pop all from stack:\n");
     while(!is_empty(&s)) printf("%d\n", pop(&s));
@@ -44,6 +45,7 @@ int main(int argc, char *argv[])
     freestack(&s);
     return 0;
 }
+
 
 stack init_stack_int(int size)
 {
