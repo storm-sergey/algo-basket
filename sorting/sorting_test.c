@@ -6,33 +6,33 @@
 #define MIN -2147483647
 #define MAX 2147483647
 
-// sorting_f must be implemented to get the next arguments:
+// callback  must be implemented to get the next arguments:
 // int n - array elements amount
 // int *A - the array
-void sorting_test(void (*sorting_f))
+void sorting_test(void (*callback))
 {
     for (int i = 1; i < 102; i++)
     {
-        if(!test(sorting_f, i, 0, 10))
+        if(!test(callback, i, 0, 10))
         {
             return;
         }
     }
     for (int i = 1; i < 1001; i += 100)
     {
-        if(!test(sorting_f, i, -10000, 10000))
+        if(!test(callback, i, -10000, 10000))
         {
             return;
         }
     }
-    if(!test(sorting_f, 10000, MIN, MAX))
+    if(!test(callback, 10000, MIN, MAX))
     {
         return;
     }
     printf("Sorting successful!\n");
 }
 
-int test(void (*sorting_f)(int n, int *A), int n, int min, int max)
+int test(void (*callback)(int n, int *A), int n, int min, int max)
 {
     int A[n];
     srand(time(0));
@@ -42,7 +42,7 @@ int test(void (*sorting_f)(int n, int *A), int n, int min, int max)
     }
 
     // sorting
-    (*sorting_f)(n, A);
+    (*callback)(n, A);
 
     // checking
     for (int i = 0; i < n - 1; i++)
