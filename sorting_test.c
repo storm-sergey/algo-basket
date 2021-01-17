@@ -6,6 +6,9 @@
 #define MIN -2147483647
 #define MAX 2147483647
 
+// sorting_f must be implemented to get the next arguments:
+// int n - array elements amount
+// int *A - the array
 void sorting_test(void (*sorting_f))
 {
     for (int i = 1; i < 102; i++)
