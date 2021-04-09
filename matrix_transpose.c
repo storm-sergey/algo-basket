@@ -5,9 +5,11 @@ void transpose(int **matrix, int **t_matrix, int rows, int cols);
 
 int main()
 {
-    const int rows = 3, cols = 2;
+    const int rows = 3, cols = 3;
     int **matrix;
     int **t_matrix;
+
+    // mem allocation
     matrix = malloc(rows * sizeof *matrix);
     t_matrix = malloc(cols * sizeof *t_matrix);
     for (int i = 0; i < rows; i++)
@@ -19,6 +21,7 @@ int main()
         t_matrix[i] = malloc(rows * sizeof *t_matrix[i]);
     }
     
+    // the matrix filling
     int num = 1;
     for (int i = 0; i < rows; i++)
     {
@@ -27,8 +30,10 @@ int main()
             matrix[i][j] = num++;
         }
     }
+    
     transpose(matrix, t_matrix, rows, cols);
     
+    // output 
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++)
@@ -47,15 +52,16 @@ int main()
         printf("\n");
     }
     
+    // free mem
     for (int i = 0; i < rows; i++)
     {
         free(matrix[i]);
     }
-    free(matrix);
     for (int i = 0; i < cols; i++)
     {
         free(t_matrix[i]);
     }
+    free(matrix);
     free(t_matrix);
     return 0;
 }
