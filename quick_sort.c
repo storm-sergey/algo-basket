@@ -1,6 +1,5 @@
 #include <time.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include "sorting_test.h"
 
 typedef struct Pivot
@@ -9,10 +8,10 @@ typedef struct Pivot
     int right;
 } piv;
 
-void quick_sort(int, int *A);
-void _qsort(int left, int right, int *A);
-piv partition(int left, int right, int *A);
-void swap(int *a, int *b);
+void quick_sort(int, int*);
+void _qsort(int, int, int*);
+piv partition(int, int, int*);
+void swap(int*, int*);
 
 int buff;
 
