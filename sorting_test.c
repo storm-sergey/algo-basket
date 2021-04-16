@@ -49,6 +49,13 @@ int test(void (*sorting_f)(int n, int *A), int n, int min, int max)
     {
         if (A[i] > A[i + 1])
         {
+            printf("[");
+            for (int j = 0; j < n - 1; j++)
+            {
+                printf("%d, ", A[j]);
+            }
+            printf("%d]\n", A[n - 1]);
+            printf("\n");
             printf("Fail with:\n");
             printf("n = %d\n", n);
             printf("i = %d\n", i);
