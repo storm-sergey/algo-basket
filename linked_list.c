@@ -1,13 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+// TODO: I have a trouble with freeing memo when I use rm_list()...
+
 typedef struct __Linked_list_item {
     int value;
     struct __Linked_list_item *next, *prev;
 } __item;
 
 typedef struct Meta_linked_list {
-    int amount, current_index;
+    int amount, current_index, err;
     __item *first, *last, *current, *buff;
 } list;
 
@@ -20,7 +22,18 @@ list* create_linked_list()
     meta->current = NULL;
     meta->buff = NULL;
     meta->current_index = -1;
+    meta->err = 0;
     return meta;
+}
+
+int error(list *meta)
+{
+    if (meta->err != 0) {
+        printf("linked_list throw exception");
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 void add_first(list *meta, int value)
@@ -79,6 +92,7 @@ void take_the_position(list *meta, int index)
         step_dir = BACKWARD;
         meta->current = meta->last;
     } else {
+        meta->err = 1;
         printf("Searching the nearest valid index in the meta is failed\n");
         printf("index = %d;\n", index);
         printf("list:\n  last_index = %d;\n", meta->amount - 1);
@@ -103,6 +117,7 @@ void take_the_position(list *meta, int index)
 void insert(list *meta, int index, int value)
 {
     if (index < 0 || index > meta->amount) {
+        meta->err = 1;
         printf("insert(): the index is out of the linked list scope\n");
         return;
     }
@@ -130,6 +145,7 @@ void insert(list *meta, int index, int value)
 int get_item(list *meta, int index)
 {
     if (index < 0 || index > meta->amount) {
+        meta->err = 1;
         printf("get_item(): the index is out of the linked list scope\n");
         return 0;
     }
@@ -160,6 +176,7 @@ int get_next(list *meta)
         meta->current_index++;
         return meta->current->value;
     }
+    meta->err = 1;
     printf("get_next(): the current item has no next\n");
     return 0;
 }
@@ -171,6 +188,7 @@ int get_prev(list *meta)
         meta->current_index--;
         return meta->current->value;
     }
+    meta->err = 1;
     printf("get_prev(): the current item has no prev\n");
     return 0;
 }
@@ -182,6 +200,7 @@ int get_first(list *meta)
         meta->current_index = 0;
         return meta->current->value;
     }
+    meta->err = 1;
     printf("get_first(): list is empty\n");
     return 0;
 }
@@ -193,6 +212,7 @@ int get_last(list *meta)
         meta->current_index = meta->amount - 1;
         return meta->current->value;
     }
+    meta->err = 1;
     printf("get_last(): list is empty\n");
     return 0;
 }
@@ -216,6 +236,7 @@ void rm_first(list *meta)
         }
         meta->amount--;
     } else {
+        meta->err = 1;
         printf("rm_first(): the linked list has no elements\n");
     }
 }
@@ -239,6 +260,7 @@ void rm_last(list *meta)
         }
         meta->amount--;
     } else {
+        meta->err = 1;
         printf("rm_last(): the linked list has no elements\n");
     }
 }
@@ -246,6 +268,7 @@ void rm_last(list *meta)
 void rm_item(list *meta, int index)
 {
     if (index < 0 || index > meta->amount - 1) {
+        meta->err = 1;
         printf("rm_item(): ");
         printf("the index is out of the linked list scope\n");
         return;
@@ -287,6 +310,8 @@ void print_list(list *meta)
             printf(", %d", get_next(meta));
         }
         printf("]\n");
+    } else {
+        meta->err = 1;
     }
 }
 
@@ -329,7 +354,9 @@ int main()
     rm_item(linked_list, -1);
     print_list(linked_list);
     printf("----------------\n");
+    printf("err: %d\n", error(linked_list));
     rm_list(linked_list);
+    print_list(linked_list);
     printf("----------------\n");
     return 0;
 }
